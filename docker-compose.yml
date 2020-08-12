@@ -27,7 +27,7 @@ services:
          - ./volumes/apps:/var/www/html/apps
          - ./volumes/custom_apps:/var/www/html/custom_apps
          - /etc/localtime:/etc/localtime:ro
-         - ./volumes/traces:/traces
+         - ./volumes/xdebug:/xdebug
       depends_on:
          - db
          - redis
