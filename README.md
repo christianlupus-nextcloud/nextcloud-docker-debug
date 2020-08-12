@@ -24,3 +24,12 @@ To make use of it, you need to set a trigger.
 This can be done using e.g. an extension to your browser.
 See here for [Chrome](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) and [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/xdebug-helper-for-firefox/).
 The correesponding files will be located in `./volumes/xdebug/traces` and `./volumes/xdebug/profiles`.
+
+The user is called `admin` and has password `admin_pwd` by default.
+
+You might wnat to enable debug mode in Nextcloud:
+Go to `./volumes/config/config.php` and insert
+```php
+  'debug' => true,
+```
+
