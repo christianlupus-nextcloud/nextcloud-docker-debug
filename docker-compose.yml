@@ -1,0 +1,43 @@
+version: "2"
+
+volumes:
+   db:
+   app:
+   
+services:
+   
+   db:
+      image: mariadb:latest
+      restart: unless-stopped
+      volumes:
+         - db:/var/lib/mysql
+      env_file:
+         - db.env
+   
+   redis:
+      image: redis:latest
+      restart: unless-stopped
+   
+   app:
+      build: ./app
+      restart: unless-stopped
+      volumes:
+         - app:/var/www/html
+         - ./volumes/config:/var/www/html/config
+         - ./volumes/apps:/var/www/html/apps
+         - ./volumes/custom_apps:/var/www/html/custom_apps
+         - /etc/localtime:/etc/localtime:ro
+         - ./volumes/traces:/traces
+      depends_on:
+         - db
+         - redis
+      env_file:
+         - db.env
+      environment:
+         MYSQL_HOST: db
+         NEXTCLOUD_ADMIN_USER: admin
+         NEXTCLOUD_ADMIN_PASSWORD: admin_pwd
+         REDIS_HOST: redis
+      ports:
+         - 8000:80
+   
