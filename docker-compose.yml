@@ -2,7 +2,6 @@ version: "2"
 
 volumes:
    db:
-   app:
    
 services:
    
@@ -22,7 +21,7 @@ services:
       build: ./app
       restart: unless-stopped
       volumes:
-         - app:/var/www/html
+         - ./volumes/base:/var/www/html
          - ./volumes/config:/var/www/html/config
          - ./volumes/apps:/var/www/html/apps
          - ./volumes/custom_apps:/var/www/html/custom_apps
