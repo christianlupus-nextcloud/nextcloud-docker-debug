@@ -25,7 +25,7 @@ services:
          - ./volumes/config:/var/www/html/config
          - ./volumes/apps:/var/www/html/apps
          - ./volumes/custom_apps:/var/www/html/custom_apps
-         - /etc/localtime:/etc/localtime:ro
+#         - /etc/localtime:/etc/localtime:ro
          - ./volumes/xdebug:/xdebug
       depends_on:
          - db

@@ -5,7 +5,12 @@ To do so, the `xdebug` extension of PHP is installed additionally.
 
 ## How to setup
 
-Simply clone this repository on you local machine and call
+Simply clone this repository on you local machine.
+When running on linux you might want to uncomment the following line:
+```
+         - /etc/localtime:/etc/localtime:ro
+```
+You then just need to call
 
 ```
 docker-compose up -d
