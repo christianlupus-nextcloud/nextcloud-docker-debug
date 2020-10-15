@@ -12,12 +12,17 @@ The debug instance will listen on `localhost:8000` with user `admin` and passwor
 
 - [Setup](#setup)
     - [Building the image](#building-the-image)
-    - [Initializing the databases](#initializing-the-database)
+    - [Initializing the databases](#initializing-the-databases)
     - [Create mounting folders](#create-mounting-folders)
     - [Configuring the nextcloud timezone](#configuring-the-nextcloud-timezone)
-    - [Install the basic nextcloud container](#installing-the-basic-nextcloud-container)
+    - [Install the basic nextcloud container](#install-the-basic-nextcloud-container)
     - [Open the page in the browser](#open-the-page-in-the-browser)
 - [Usage](#usage)
+    - [Command line programs](#command-line-programs)
+    - [Installation of app to debug](#installation-of-app-to-debug)
+    - [Functionality of the debugger](#functionality-of-the-debugger)
+    - [Tracing and profiling](#tracing-and-profiling)
+    - [Debugging a PHP script](#debugging-a-php-script)
 
 ## Setup
 
