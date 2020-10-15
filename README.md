@@ -109,6 +109,13 @@ These allow to open the database (even during a live deebugging session and to i
 You can install any custom apps in `./volumes/custom_apps`.
 How to install an app there you must reference to the official documentation and the documentation of the app.
 
+You might need to allow the development user writable access to `./volumes/custom_apps`.
+This can be done (assuming you are in group `developers`) by
+```
+sudo chgrp developers volumes/custom_apps
+sudo chmod g+w volumes/custom_apps
+```
+
 For example to install the cookbook app from git, you would navigate to the `volumes/custom_apps` folder and checkout the app from git
 ```
 git clone git@github.com:nextcloud/cookbook.git
@@ -152,4 +159,59 @@ You need to use one suitable for your operating system.
 
 ### Debugging a PHP script
 
-TODO
+The debugging requires interaction with your IDE to allow e.g. singe-step debugging and the like.
+I will describe the setting using the eclipse plattform as this is my personal favorite IDE for these types of setups.
+
+I assume, you have the IDE already preinstalled and also the plugins for PHP and web development installed.
+
+**Hint:** When the debugging port 9000 is used by another process, the debugging will silently fail to start.
+You will not get any warning or message.
+So make sure, the port is free for usage **before starting eclipse**.
+You need a restart of eclipse if teh port has been in use.
+
+#### Preparation of eclipse (one time only per workspace)
+
+There are a few settings you need to set before you can start the session.
+
+Go to Preferencees -> PHP -> Debug -> Debuggers and click on XDebug.
+Click on configure to open a new dialog.
+Set the setting *Allow remote session (JIT)* to **any**.
+
+You might want to set under Preferences -> PHP -> Debug uncheck the box *Break at first line*.
+Otherwise you will be thrown into the internals of the nextcloud core.
+
+#### Creation of a project
+
+**Linux only:**
+Navigate to this repository and then to `volumes`.
+Ensure that the directory `base` is owned by a group you are member of (`sudo chgrp developers base` if you are member of `developers`) and make the `base` directory writable for that group (`sudo chmod g+w base`).
+That way you can create files in the nextcloud base directory.
+Eclipse needs this in order to store some metadata.
+
+Create a new PHP project with existing source location.
+Set the location to `volumes/base` relative to this repository.
+Click on *Next*.
+
+On the next pane, the libraries and source folders are to be set up.
+Leave it at its defaults and click on *Next*.
+
+The next tab ist the configuration of the source folders and filters.
+Click on *Link Source* to open a new dialog.
+Select (using *Browse*) the location of the app within the `volumes/custom_apps` folder.
+In the example from above that would be `volumes/custom_apps/cookbook`.
+The (destination) folder name would be `custom_apps/cookbook`.
+Set the option to *update the exclusion filters in the other source folder to solve nesting*.
+
+If there are other apps in the `custom_apps` folder to be used, add these as well.
+
+Verify that the project has a valid structure and the app to be debugged is visible in the `custom_apps` folder of the project.
+
+#### Debugging
+
+Now you have set up everything for debugging.
+You might need to restart eclipse in order to save and use all settings.
+When enabling the [debugging session in the browser](#functionality-of-the-debugger) and you reload the site, you should just get no special effect.
+Especially, in eclipse you should not be asked about starting a debugging session or see a stopped script execution.
+This will get tendious as all resources are going to trigger dozens of debugging sessions, so make sure, the debugger starts not at fist sight.
+
+You can set breakpoints in your PHP code and as soon as that line is reached, the script will stop executing and you can look around in eclipse.
