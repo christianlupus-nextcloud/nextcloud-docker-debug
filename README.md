@@ -124,7 +124,7 @@ In the case of the cookbook app you need to install some dependencies and build 
 For this special app you need to run `npm install && make` to build the app but this depends on the app you want to debug.
 Finally, you can enable the app using the occ interface by
 ```
-./occ app:enable cookbook
+./occ.sh app:enable cookbook
 ```
 
 Additionally, the configuration can be tweaked under `./volumes/config`.
