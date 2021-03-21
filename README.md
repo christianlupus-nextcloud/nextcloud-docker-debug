@@ -20,7 +20,7 @@ The debug instance will listen on `localhost:8000` with user `admin` and passwor
     - [Open the page in the browser](#open-the-page-in-the-browser)
 - [Usage](#usage)
     - [Command line programs](#command-line-programs)
-    - [Calling programs in the containers](calling-programs-in-the-containers)
+    - [Calling programs in the containers](#calling-programs-in-the-containers)
     - [Installation of app to debug](#installation-of-app-to-debug)
     - [Functionality of the debugger](#functionality-of-the-debugger)
     - [Tracing and profiling](#tracing-and-profiling)
