@@ -5,7 +5,7 @@ To do so, the `xdebug` extension of PHP is installed additionally.
 
 ## TL;DR
 
-Just build the image with `docker-compose build --pull` and start the stack by `docker-compose up -d`.
+Just build the image with `docker-compose build --pull`. Update the uid in the `docker-compose.yml` file to match your own uid and start the stack by `docker-compose up -d`.
 The debug instance will listen on `localhost:8000` with user `admin` and passwort `admin_pwd`.
 
 ## Content
@@ -15,6 +15,7 @@ The debug instance will listen on `localhost:8000` with user `admin` and passwor
     - [Initializing the databases](#initializing-the-databases)
     - [Create mounting folders](#create-mounting-folders)
     - [Configuring the nextcloud timezone](#configuring-the-nextcloud-timezone)
+    - [Correct the uid of the user running the daemons](#correct-the-uid-of-the-user-running-the-daemon-linux-only)
     - [Install the basic nextcloud container](#install-the-basic-nextcloud-container)
     - [Open the page in the browser](#open-the-page-in-the-browser)
 - [Usage](#usage)
@@ -77,6 +78,24 @@ When running on Linux you might want to uncomment the following line (keep the i
 
 For Windows installations, this should not be necessary.
 
+### Correct the uid of the user running the daemon (Linux only)
+
+Inside the container a HTTP/PHP server is running under a virtual user `www-data`. This user will by need to have the same uid as your development user. If the ids do not match, you will not have access to the files.
+
+First, get the id of your development user. That is, call
+```
+id -u
+```
+A single number will be output. Copy that number.
+
+Open the `docker-compose.yml` file and edit it such that the line reads
+```
+    DEBUG_USER_ID: <number>
+```
+where `<number>` is the saved number from above. Please keep the indentation as it was.
+
+For Windows installations, this step should not be necessary.
+
 ### Install the basic nextcloud container
 
 Now that you prepared all your structure, you can install the nextcloud instance.
@@ -102,19 +121,12 @@ These are `admin` and `admin_pwd` respective.
 ### Command line programs
 
 In the current folder there are the scripts `db.sh` and `occ.sh`.
-These allow to open the database (even during a live deebugging session and to invoke the OCC console commands.
+These allow to open the database (even during a live debugging session and to invoke the OCC console commands.
 
 ### Installation of app to debug
 
 You can install any custom apps in `./volumes/custom_apps`.
 How to install an app there you must reference to the official documentation and the documentation of the app.
-
-You might need to allow the development user writable access to `./volumes/custom_apps`.
-This can be done (assuming you are in group `developers`) by
-```
-sudo chgrp developers volumes/custom_apps
-sudo chmod g+w volumes/custom_apps
-```
 
 For example to install the cookbook app from git, you would navigate to the `volumes/custom_apps` folder and checkout the app from git
 ```
