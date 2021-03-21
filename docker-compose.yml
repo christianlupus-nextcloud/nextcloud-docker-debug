@@ -5,42 +5,42 @@ volumes:
    
 services:
    
-   db:
-      image: mariadb:latest
-      restart: unless-stopped
-      volumes:
-         - db:/var/lib/mysql
-      env_file:
-         - db.env
-   
-   redis:
-      image: redis:latest
-      restart: unless-stopped
-      command: redis-server --requirepass redis_pwd
-   
-   app:
-      build: ./app
-      restart: unless-stopped
-      volumes:
-         - ./volumes/base:/var/www/html
-         - ./volumes/config:/var/www/html/config
-         - ./volumes/apps:/var/www/html/apps
-         - ./volumes/data:/var/www/html/data
-         - ./volumes/custom_apps:/var/www/html/custom_apps
-#         - /etc/localtime:/etc/localtime:ro
-         - ./volumes/xdebug:/xdebug
-      depends_on:
-         - db
-         - redis
-      env_file:
-         - db.env
-      environment:
-         MYSQL_HOST: db
-         NEXTCLOUD_ADMIN_USER: admin
-         NEXTCLOUD_ADMIN_PASSWORD: admin_pwd
-         REDIS_HOST: redis
-         REDIS_HOST_PASSWORD: redis_pwd
-         DEBUG_USER_ID: 1000
-      ports:
-         - 8000:80
+    db:
+        image: mariadb:latest
+        restart: unless-stopped
+        volumes:
+            - db:/var/lib/mysql
+        env_file:
+            - db.env
+    
+    redis:
+        image: redis:latest
+        restart: unless-stopped
+        command: redis-server --requirepass redis_pwd
+    
+    app:
+        build: ./app
+        restart: unless-stopped
+        volumes: &vol_mount
+            - ./volumes/base:/var/www/html
+            - ./volumes/config:/var/www/html/config
+            - ./volumes/apps:/var/www/html/apps
+            - ./volumes/data:/var/www/html/data
+            - ./volumes/custom_apps:/var/www/html/custom_apps
+#             - /etc/localtime:/etc/localtime:ro
+            - ./volumes/xdebug:/xdebug
+        depends_on:
+            - db
+            - redis
+        env_file:
+            - db.env
+        environment:
+            MYSQL_HOST: db
+            NEXTCLOUD_ADMIN_USER: admin
+            NEXTCLOUD_ADMIN_PASSWORD: admin_pwd
+            REDIS_HOST: redis
+            REDIS_HOST_PASSWORD: redis_pwd
+            DEBUG_USER_ID: 1000
+        ports:
+            - 8000:80
    
