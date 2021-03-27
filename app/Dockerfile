@@ -5,7 +5,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN \
 	apt-get update && \
-	apt-get install -y npm && \
+	apt-get install -y npm less nano vim && \
 	apt-get clean && \
 	npm install -g npm
 
