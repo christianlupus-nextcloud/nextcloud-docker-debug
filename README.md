@@ -242,3 +242,11 @@ Especially, in eclipse you should not be asked about starting a debugging sessio
 This will get tendious as all resources are going to trigger dozens of debugging sessions, so make sure, the debugger starts not at fist sight.
 
 You can set breakpoints in your PHP code and as soon as that line is reached, the script will stop executing and you can look around in eclipse.
+
+#### Troubleshooting
+
+To use Linux Docker on Windows, the Docker engine must first be explicitly told that a Linux container is being used. A blog entry describing this can be found (here)[https://www.docker.com/blog/docker-for-windows-18-02-with-windows-10-fall-creators-update/].
+
+If the Docker Engine fails to start on Windows 10, the following can be tested.
+
+
