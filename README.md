@@ -247,6 +247,13 @@ You can set breakpoints in your PHP code and as soon as that line is reached, th
 
 To use Linux Docker on Windows, the Docker engine must first be explicitly told that a Linux container is being used. A blog entry describing this can be found [here](https://www.docker.com/blog/docker-for-windows-18-02-with-windows-10-fall-creators-update/).
 
-If the Docker Engine fails to start on Windows 10, the following can be tested.
-
+If the Docker Engine fails to start on Windows 10, the following can be tested:
+* Open "Window Security"
+* Open "App & Browser control"
+* Click "Exploit protection settings" at the bottom
+* Switch to "Program settings" tab
+* Locate "C:\WINDOWS\System32\vmcompute.exe" in the list and expand it
+* Click "Edit"
+* Scroll down to "Code flow guard (CFG)" and uncheck "Override system settings"
+* Start vmcompute from powershell `net start vmcompute`
 
