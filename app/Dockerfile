@@ -1,7 +1,9 @@
 
 FROM nextcloud:apache
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN \
+	pecl update-channels && \
+	pecl install xdebug && docker-php-ext-enable xdebug
 
 RUN \
 	apt-get update && \
