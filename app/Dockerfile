@@ -1,5 +1,5 @@
 
-FROM nextcloud:apache
+FROM nextcloud:24-apache
 
 RUN \
 	pecl update-channels && \
