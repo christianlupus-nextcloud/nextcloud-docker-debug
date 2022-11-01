@@ -15,6 +15,9 @@ COPY install_composer.sh /tmp
 RUN /tmp/install_composer.sh
 
 COPY xdebug*.config /usr/local/share/xdebug/
+# RUN cat /tmp/xdebug.config >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+# 	rm /tmp/xdebug.config && \
+# 	mkdir -p /xdebug/traces /xdebug/profiles && \
 
 RUN \
 	v=$(php -v | grep -oi 'xdebug v[0-9]*' | sed 's@xdebug v@@i') && \
